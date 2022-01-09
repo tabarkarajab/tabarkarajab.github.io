@@ -1,0 +1,235 @@
+/* -----------------------------------------
+	02. Main Navigation
+----------------------------------------- */
+
+.nav {
+	display: block;
+	width: auto;
+	font-size: 14px;
+
+	#footer & {
+		text-align: left;
+	}
+}
+
+.navigation {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	width: auto;
+
+	// Functional Styles
+	// ===================================
+	li { position: relative; }
+	> li { display: inline-block; }
+	a { display: block; white-space: nowrap; }
+
+	ul {
+		text-align: left;
+		position: absolute;
+		z-index: 10;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity .25s ease .2s, visibility 0s ease .35s;
+		margin-left: 10px;
+    	max-width: none;
+
+		&.sub-menu {
+			margin-top: 13px;
+		}
+	}
+
+	ul ul {
+		top: -16px;
+		left: 100%;
+		margin: 0;
+		transform: translate(0, 0);
+	}
+
+	> li:first-child {
+		ul {
+			margin-left: 0;
+		}
+	}
+
+	li:hover,
+	li:focus-within {
+		> ul {
+			transition-delay: 0s, 0s, 0s;
+			visibility: visible;
+      		opacity: 1;
+		}
+
+		ul {
+			z-index: 15;
+		}
+	}
+
+	> li:hover > ul {
+		transform: translate(0, 0);
+	}
+
+	li li:hover > ul {
+		transform: translate(0, 0);
+	}
+
+	> .nav-open-left {
+		ul {
+			right: 0;
+		}
+
+		ul ul {
+			right: 100%;
+			left: auto;
+		}
+	}
+
+	li {
+		.nav-open-left {
+			ul {
+				right: 100%;
+				left: auto;
+			}
+
+			&.menu-item-has-children > a {
+				&::after {
+					@include olsen-icon(\E00B);
+				}
+			}
+		}
+
+		&.nav-open-left {
+			.menu-item-has-children > a {
+				&::after {
+					@include olsen-icon(\E00B);
+				}
+			}
+		}
+	}
+
+	// Visual Styles
+  // ===================================
+
+	// Sub-menu containers
+	ul {
+		padding: 1px;
+		list-style: none;
+		min-width: 200px;
+		background: $sidebar-border-color;
+	}
+
+	// Global Menu Link Styles
+	a {
+		position: relative;
+		color: currentColor;
+	}
+
+	// First Level Menu Links
+	// -----------------------------------
+
+	// Default Styles
+	> li > a {
+		margin: 0 12px;
+
+		&:hover,
+		&:active {
+		color: $link-color;
+		}
+	}
+
+	> li:first-child {
+		> a {
+			margin-left: 0;
+		}
+  	}
+
+
+	> li:hover {
+		> a {
+			color: $link-color;
+		}
+	}
+
+  .current-menu-parent,
+  .current-menu-ancestor,
+  .current-menu-item {
+    > a {
+      color: $link-color;
+    }
+  }
+
+	// Sub-Menu Links
+	// -----------------------------------
+
+	// Default Styles
+	li li a {
+		color: currentColor;
+		background: $white;
+		padding: 8px;
+		margin-bottom: 1px;
+
+		&:hover {
+			background: $sidebar-border-color;
+			color: $primary-color;
+		}
+	}
+
+	li li:hover a {
+		color: $link-color;
+	}
+
+	// Arrows
+	// -----------------------------------
+
+	// First Level (Facing Down)
+	.menu-item-has-children,
+	.page_item_has_children {
+		> a::after {
+			@include olsen-icon(\E00A);
+			font-size: 13px;
+			font-weight: bold;
+			position: relative;
+			top: 0;
+			right: -6px;
+			line-height: normal;
+		}
+	}
+
+	// Sub-Menus (Facing Right)
+	li .menu-item-has-children,
+	li .page_item_has_children {
+		> a {
+			padding-right: 25px;
+
+			&::after {
+				@include olsen-icon(\E00C);
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+		}
+	}
+}
+
+.mobile-nav-trigger {
+	font-size: 16px;
+	line-height: 1;
+	border: solid 2px #ebebeb;
+	padding: 10px 12px;
+	display: none;
+
+	&:active,
+	&:focus {
+		color: $text-color;
+	}
+
+	i {
+		position: relative;
+		top: 2px;
+	}
+}
+
+.mobile-nav-location {
+	display: none;
+}
