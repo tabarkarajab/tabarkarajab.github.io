@@ -1,0 +1,442 @@
+/* -----------------------------------------
+	01. General
+----------------------------------------- */
+// Reset the box-sizing
+html {
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar; // sass-lint:disable-line no-vendor-prefixes
+  -webkit-tap-highlight-color: rgba($black, 0); // sass-lint:disable-line no-vendor-prefixes
+  height: 100%;
+}
+
+* {
+  box-sizing: inherit;
+
+  &::before,
+  &::after {
+	box-sizing: inherit;
+  }
+}
+
+// Suppress the focus outline on elements that cannot be accessed via keyboard.
+[tabindex="-1"] {
+  &:focus {
+	outline: none !important;
+  }
+}
+
+// Always hide an element with the `hidden` HTML attribute (from PureCSS).
+[hidden] {
+  display: none !important;
+}
+
+/* Basic Typography
+=================================== */
+body {
+	line-height: 1.625;
+	font-size: 16px;
+	font-weight: normal;
+	background: #fff;
+	color: $text-color;
+	font-family: $secondary-font;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $primary-font;
+	font-weight: 400;
+	line-height: normal;
+	margin: 0 0 15px 0;
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+}
+
+h1 {
+	font-size: 28px;
+
+	&.entry-title {
+		font-size: 26px;
+	}
+}
+
+h2 { font-size: 26px; }
+h3 { font-size: 24px; }
+h4 { font-size: 22px; }
+h5 { font-size: 20px; }
+h6 { font-size: 18px; }
+
+p {
+	margin: 0 0 30px 0;
+}
+
+img {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+	outline: none;
+	color: $primary-color;
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		color: $link-color;
+		outline: none;
+		text-decoration: none;
+	}
+
+	&:active {
+		outline: none;
+	}
+}
+
+.group {
+	@include clearfix();
+}
+
+/* General Element Styling
+=================================== */
+
+/* Reset figure margin from normalize.css */
+figure {
+	margin: 0;
+}
+
+/* Lists */
+ul, ol {
+	padding-left: 20px;
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+dl {
+	margin: 0 0 20px;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin: 0 0 15px;
+}
+
+/* Blockquotes */
+blockquote {
+	margin: 20px 0;
+	padding-left: 20px;
+	border-left: 2px solid #ebebeb;
+	font-family: $primary-font;
+	font-size: 18px;
+	font-style: italic;
+	font-weight: normal;
+
+	cite {
+		display: block;
+		font-weight: bold;
+		font-style: italic;
+		margin: 10px 0 0;
+		color: rgba($text-color, 0.8);
+		font-size: 14px
+	}
+}
+
+/* Tables */
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100%;
+}
+
+.entry-content,
+.comment-content {
+	table {
+		border-width: 1px 0 0 1px;
+		margin-bottom: 24px;
+	}
+
+	th:first-child,
+	td:first-child {
+		padding-left: 0;
+	}
+
+	th,
+	td {
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+	}
+
+	caption,
+	th,
+	td {
+		font-weight: normal;
+		text-align: left;
+		padding: 5px;
+		vertical-align: middle;
+	}
+
+	th {
+		border-width: 0 1px 1px 0;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 85%;
+	}
+
+	td {
+		border-width: 0 1px 1px 0;
+	}
+}
+
+/* Code */
+code, kbd, tt, var, samp, pre {
+	font-family: monospace, serif;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	font-style: normal;
+}
+
+pre {
+	padding: 15px;
+	border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Various */
+address {
+	margin: 0 0 15px;
+}
+
+.sr-only,
+.screen-reader-text {
+  @include sr-only;
+}
+
+.sr-only-focusable,
+.screen-reader-text-focusable {
+  @include sr-only-focusable;
+}
+
+/* Embeds and iframes
+=================================== */
+
+embed,
+iframe,
+object,
+video,
+audio {
+	margin-bottom: 15px;
+	max-width: 100%;
+}
+
+p > embed,
+p > iframe,
+p > object,
+p > audio,
+span > embed,
+span > iframe,
+span > object,
+span > audio {
+	margin-bottom: 0;
+}
+
+#map,
+.map * {
+	max-width: none !important;
+}
+
+
+/* General Form Styling
+=================================== */
+
+label {
+	display: block;
+	margin: 0 0 2px;
+	font-weight: normal;
+}
+
+input,
+textarea {
+	transition: all 0.18s;
+	display: inline-block;
+	font-size: inherit;
+	width: 100%;
+	max-width: 100%;
+	padding: 8px 12px 8px 15px;
+	line-height: normal;
+	background-color: #ebebeb;
+	background-image: none;
+	border: none;
+
+	&:focus, &:hover {
+		outline: none;
+		background-color: #eee;
+	}
+
+	@include media-breakpoint-down(md) {
+		width: 100%;
+	}
+}
+
+input[type="search"] { /* Restoring box-sizing */
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+textarea {
+	height: auto;
+}
+
+select {
+	max-width: 100%;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	margin: 4px 0 0;
+	line-height: normal;
+	width: auto;
+	height: auto;
+}
+
+fieldset {
+	margin: 0 0 15px;
+	padding: 0;
+	border: none;
+	min-width: 0;
+}
+
+/* Placeholder text color */
+@include placeholder {
+	color: rgba($text-color, 0.3);
+	font-weight: normal;
+	font-size: 11px;
+	opacity: 1;
+}
+
+
+/* Buttons
+=================================== */
+.btn,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+	display: inline-block;
+	font-weight: normal;
+	margin: 0;
+	line-height: normal;
+	border: none;
+	box-shadow: none;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: 0.18s background-color ease, color 0.18s ease, 0.18s border-color ease;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	width: auto;
+	height: auto;
+	background-image: none;
+	padding: 12px 25px 11px;
+	font-size: 13px;
+	background: $link-color;
+	color: #FFF;
+
+	&:active {
+		outline: none;
+	}
+
+	&:hover {
+		background: $primary-color;
+		color: #FFF;
+		text-decoration: none;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+
+/* Simple Lightbox Theme Overrides
+=================================== */
+.sl-overlay {
+    opacity: .9;
+}
+
+.sl-wrapper {
+    button {
+        &:hover {
+            background: none;
+        }
+    }
+
+    .sl-close {
+        right: 35px;
+        top: 55px;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        font-size: 40px;
+    }
+
+    .sl-image {
+        .sl-caption {
+            padding: 10px 0 0;
+            color: inherit;
+            background: inherit;
+            font-size: 14px;
+            position: relative;
+        }
+    }
+
+    .sl-navigation {
+        button {
+            &.sl-prev,
+            &.sl-next {
+                font-size: 70px;
+                height: 110px;
+                margin-top: -55px;
+            }
+        }
+    }
+}
+
+/* Text Helpers
+=================================== */
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-justified {
+	text-align: justify;
+}
+
+.text-uc {
+	text-transform: uppercase;
+}
+
+.img-round {
+	border-radius: 50%;
+}
